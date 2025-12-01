@@ -15,7 +15,7 @@ const Orders = () => {
         fetchOrders();
         fetchPartners();
 
-        const socket = io('http://localhost:5001');
+        const socket = io('http://localhost:5002');
 
         socket.on('connect', () => {
             console.log('Retailer Orders connected to socket');
@@ -161,7 +161,7 @@ const Orders = () => {
                                         </button>
                                     )}
                                     <button
-                                        onClick={() => window.open(`http://localhost:5001/api/retailer/invoices/${order._id}`, '_blank')}
+                                        onClick={() => window.open(`http://localhost:5002/api/retailer/invoices/${order._id}`, '_blank')}
                                         className="ml-2 text-gray-400 hover:text-indigo-600 transition"
                                         title="Download Invoice"
                                     >

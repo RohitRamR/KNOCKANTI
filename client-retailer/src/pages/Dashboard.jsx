@@ -10,7 +10,7 @@ const Dashboard = () => {
     useEffect(() => {
         fetchStats();
 
-        const socket = io('http://localhost:5001');
+        const socket = io('http://localhost:5002');
 
         socket.on('connect', () => {
             console.log('Dashboard connected to socket', socket.id);

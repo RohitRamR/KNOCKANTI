@@ -28,7 +28,7 @@ const SmartSyncControlCenter = () => {
         try {
             // In real app, use configured axios instance with auth headers
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/smartsync/history', {
+            const res = await axios.get('http://localhost:5002/api/smartsync/history', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setSyncHistory(res.data);
@@ -45,7 +45,7 @@ const SmartSyncControlCenter = () => {
             // For prototype, we send the payload
             const payload = JSON.parse(manualPayload);
 
-            const res = await axios.post('http://localhost:5000/api/smartsync/ingest', {
+            const res = await axios.post('http://localhost:5002/api/smartsync/ingest', {
                 payload,
                 retailerId: '674b34460777130541295968' // HARDCODED FOR DEMO - REPLACE WITH REAL ID
             }, {
@@ -171,8 +171,8 @@ const SmartSyncControlCenter = () => {
                                             <td className="p-4 text-sm">{log.sourceType}</td>
                                             <td className="p-4">
                                                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${log.status === 'SUCCESS' ? 'bg-green-500/10 text-green-500' :
-                                                        log.status === 'FAILED' ? 'bg-red-500/10 text-red-500' :
-                                                            'bg-orange-500/10 text-orange-500'
+                                                    log.status === 'FAILED' ? 'bg-red-500/10 text-red-500' :
+                                                        'bg-orange-500/10 text-orange-500'
                                                     }`}>
                                                     {log.status}
                                                 </span>

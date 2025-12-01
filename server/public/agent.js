@@ -5,10 +5,11 @@ const crypto = require('crypto');
 
 // Configuration
 const CONFIG = {
-    API_URL: 'http://localhost:5001/api/smartsync/webhook',
+    API_URL: 'http://localhost:5002/api/smartsync/webhook',
     API_KEY: process.argv[2] || 'YOUR_API_KEY_HERE', // Pass as arg or edit file
     WATCH_FILE: path.join(__dirname, 'inventory.csv'),
-    POLL_INTERVAL: 5000, // 5 seconds
+    WATCH_DIR: path.join(__dirname, 'inventory_drop'), // New directory to watch
+    POLL_INTERVAL: 2000, // Check every 2 seconds
     MAX_RETRIES: 5
 };
 

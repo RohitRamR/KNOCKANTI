@@ -111,7 +111,7 @@ const Products = () => {
                             <div className="relative h-48 bg-bg-secondary overflow-hidden">
                                 {product.images && product.images.length > 0 ? (
                                     <img
-                                        src={`http://localhost:5001${product.images[0]}`}
+                                        src={`http://localhost:5002${product.images[0]}`}
                                         alt={product.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />

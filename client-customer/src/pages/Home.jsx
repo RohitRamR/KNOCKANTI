@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         fetchProducts();
 
-        const socket = io('http://localhost:5001');
+        const socket = io('http://localhost:5002');
 
         socket.on('connect', () => {
             console.log('Customer Home connected to socket');

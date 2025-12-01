@@ -1,8 +1,8 @@
 const io = require('socket.io-client');
 const axios = require('axios');
 
-const BASE_URL = 'http://localhost:5001/api';
-const SOCKET_URL = 'http://localhost:5001';
+const BASE_URL = 'http://localhost:5002/api';
+const SOCKET_URL = 'http://localhost:5002';
 
 const socket = io(SOCKET_URL);
 

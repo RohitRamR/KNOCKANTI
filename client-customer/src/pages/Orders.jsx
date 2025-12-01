@@ -15,7 +15,7 @@ const Orders = () => {
         fetchOrders();
 
         // Connect to socket
-        socketRef.current = io('http://localhost:5001');
+        socketRef.current = io('http://localhost:5002');
 
         socketRef.current.on('connect', () => {
             console.log('Connected to socket server');
@@ -162,7 +162,7 @@ const Orders = () => {
                                         <p className="text-xs text-red-500 font-bold mt-1">Refund Initiated</p>
                                     )}
                                     <button
-                                        onClick={() => window.open(`http://localhost:5001/api/customers/invoices/${order._id}`, '_blank')}
+                                        onClick={() => window.open(`http://localhost:5002/api/customers/invoices/${order._id}`, '_blank')}
                                         className="text-xs text-indigo-600 font-bold hover:underline mt-2 block"
                                     >
                                         Download Invoice

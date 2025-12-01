@@ -1,6 +1,6 @@
 // const fetch = require('node-fetch'); // Native fetch is available in Node 18+
 
-const BASE_URL = 'http://localhost:5001/api/auth';
+const BASE_URL = 'http://localhost:5002/api/auth';
 
 const testAuth = async () => {
     try {

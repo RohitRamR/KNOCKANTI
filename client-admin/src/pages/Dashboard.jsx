@@ -33,7 +33,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchStats();
-        const socket = io('http://localhost:5001');
+        const socket = io('http://localhost:5002');
         socket.on('orderPlaced', fetchStats);
         return () => socket.disconnect();
     }, []);

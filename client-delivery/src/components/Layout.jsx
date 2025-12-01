@@ -35,7 +35,7 @@ const Layout = () => {
     useEffect(() => {
         if (user) {
             import('socket.io-client').then(({ io }) => {
-                const socket = io('http://localhost:5001');
+                const socket = io('http://localhost:5002');
 
                 socket.on('connect', () => {
                     console.log('Connected to socket server');

@@ -41,7 +41,7 @@ const Dashboard = () => {
         const interval = setInterval(fetchOrders, 10000);
 
         // Socket connection
-        const newSocket = io('http://localhost:5001');
+        const newSocket = io('http://localhost:5002');
         setSocket(newSocket);
 
         newSocket.on('connect', () => {

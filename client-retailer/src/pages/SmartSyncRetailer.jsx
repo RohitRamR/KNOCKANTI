@@ -33,7 +33,7 @@ const SmartSyncRetailer = () => {
             if (!token && axios.defaults.headers.common['Authorization']) {
                 token = axios.defaults.headers.common['Authorization'].split(' ')[1];
             }
-            const res = await axios.get('http://localhost:5001/api/smartsync/profile', {
+            const res = await axios.get('http://localhost:5002/api/smartsync/profile', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data) {
@@ -52,7 +52,7 @@ const SmartSyncRetailer = () => {
             }
 
             // Assuming backend endpoint is accessible to retailers too
-            const res = await axios.get('http://localhost:5001/api/smartsync/history', {
+            const res = await axios.get('http://localhost:5002/api/smartsync/history', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setSyncHistory(res.data);
@@ -79,7 +79,7 @@ const SmartSyncRetailer = () => {
                 const formData = new FormData();
                 formData.append('file', file);
 
-                const response = await fetch('http://localhost:5001/api/smartsync/ingest', {
+                const response = await fetch('http://localhost:5002/api/smartsync/ingest', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ const SmartSyncRetailer = () => {
                 setFile(null);
             } else if (activeTab === 'manual-entry') {
                 if (!jsonText) return;
-                await axios.post('http://localhost:5001/api/smartsync/ingest', {
+                await axios.post('http://localhost:5002/api/smartsync/ingest', {
                     payload: JSON.parse(jsonText)
                 }, {
                     headers: { Authorization: `Bearer ${token}` }
@@ -256,7 +256,7 @@ const SmartSyncRetailer = () => {
                                     onClick={() => {
                                         // Download the agent script
                                         const link = document.createElement('a');
-                                        link.href = 'http://localhost:5001/agent.js';
+                                        link.href = 'http://localhost:5002/agent.js';
                                         link.download = 'agent.js';
                                         document.body.appendChild(link);
                                         link.click();
@@ -289,11 +289,11 @@ const SmartSyncRetailer = () => {
                                 <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 group relative">
                                     <p className="text-xs text-gray-500 mb-1">Webhook URL:</p>
                                     <code className="text-xs font-mono text-gray-800 break-all select-all block">
-                                        http://localhost:5001/api/smartsync/webhook
+                                        http://localhost:5002/api/smartsync/webhook
                                     </code>
                                     <button
                                         onClick={() => {
-                                            navigator.clipboard.writeText('http://localhost:5001/api/smartsync/webhook');
+                                            navigator.clipboard.writeText('http://localhost:5002/api/smartsync/webhook');
                                             toast.success('URL copied to clipboard!');
                                         }}
                                         className="absolute top-2 right-2 p-1 bg-white border border-gray-200 rounded hover:bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -497,11 +497,11 @@ const SmartSyncRetailer = () => {
                                         </div>
                                         <div className="flex gap-2">
                                             <code className="flex-1 bg-gray-50 border border-gray-200 p-3 rounded-lg text-sm font-mono text-gray-800 break-all flex items-center">
-                                                http://localhost:5001/api/smartsync/webhook
+                                                http://localhost:5002/api/smartsync/webhook
                                             </code>
                                             <button
                                                 onClick={() => {
-                                                    navigator.clipboard.writeText('http://localhost:5001/api/smartsync/webhook');
+                                                    navigator.clipboard.writeText('http://localhost:5002/api/smartsync/webhook');
                                                     toast.success('URL copied!');
                                                 }}
                                                 className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 rounded-lg font-medium text-sm transition-colors"
@@ -611,7 +611,7 @@ const SmartSyncRetailer = () => {
                                             <button
                                                 onClick={() => {
                                                     const link = document.createElement('a');
-                                                    link.href = 'http://localhost:5001/agent.js';
+                                                    link.href = 'http://localhost:5002/agent.js';
                                                     link.download = 'agent.js';
                                                     document.body.appendChild(link);
                                                     link.click();

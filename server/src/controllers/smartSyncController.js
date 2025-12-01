@@ -167,19 +167,20 @@ exports.ingestPayload = async (req, res) => {
         for (const item of payload) {
             try {
                 // Fallback: If mapped field is missing, try standard keys (sku, stock, price, name)
-                const sku = item[mapping.sku] || item.sku || item.item_code || item.id;
+                // Also support common variations like ItemCode, QOH, MRP, Description
+                const sku = item[mapping.sku] || item.sku || item.item_code || item.id || item.ItemCode;
 
                 // Handle various number formats (e.g., "$10.00", "1,000")
-                const stockRaw = item[mapping.stock] || item.stock || item.qty || item.quantity;
-                const priceRaw = item[mapping.price] || item.price || item.mrp || item.cost;
-                const name = item[mapping.name] || item.name || item.title || item.description;
+                const stockRaw = item[mapping.stock] || item.stock || item.qty || item.quantity || item.QOH || item.qoh;
+                const priceRaw = item[mapping.price] || item.price || item.mrp || item.cost || item.MRP;
+                const name = item[mapping.name] || item.name || item.title || item.description || item.Description;
 
                 const stock = stockRaw ? parseInt(String(stockRaw).replace(/[^0-9.-]/g, '')) : 0;
                 const price = priceRaw ? parseFloat(String(priceRaw).replace(/[^0-9.-]/g, '')) : 0;
 
                 if (!sku) {
                     failed++;
-                    errors.push({ item, reason: `Missing SKU (Mapped field '${mapping.sku}' or standard 'sku' not found)` });
+                    errors.push({ item, reason: `Missing SKU (Mapped field '${mapping.sku}' or standard 'sku'/'ItemCode' not found)` });
                     continue;
                 }
 

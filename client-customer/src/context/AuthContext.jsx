@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // Configure axios defaults
-    axios.defaults.baseURL = 'http://localhost:5001/api';
+    axios.defaults.baseURL = 'http://localhost:5002/api';
     axios.defaults.withCredentials = true; // For cookies
 
     useEffect(() => {

@@ -25,7 +25,7 @@ const runTest = async () => {
 
         // 3. Send to Webhook
         console.log('Sending payload to webhook...');
-        const res = await axios.post('http://localhost:5001/api/smartsync/webhook', { payload }, {
+        const res = await axios.post('http://localhost:5002/api/smartsync/webhook', { payload }, {
             headers: { 'x-api-key': profile.apiKey }
         });
 

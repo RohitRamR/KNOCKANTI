@@ -1,0 +1,8 @@
+sku,stock,price,name
+SKU001,150,12.99,Cola Classic
+SKU002,85,10.50,Orange Soda
+SKU003,200,8.99,Lemon Sparkle
+SKU004,50,15.00,"Premium Tonic, 500ml"
+SKU005,10,5.00,Test Product Live Sync
+SKU006,99,99.99,Secure Sync Test Product
+SKU007,77,7.77,Zero Dependency Test Product

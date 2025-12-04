@@ -34,10 +34,13 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (email, password) => {
+        console.log('AuthContext: login called', email);
         const res = await axios.post('/auth/login', { email, password });
+        console.log('AuthContext: login response', res.data);
         const { accessToken, ...userData } = res.data;
         localStorage.setItem('token', accessToken);
         setUser(userData);
+        console.log('AuthContext: user set to', userData);
         axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     };
 

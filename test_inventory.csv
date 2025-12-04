@@ -1,0 +1,3 @@
+sku,stock,price,name
+TEST_CSV_001,50,199.00,Test CSV Product A
+TEST_CSV_002,100,299.50,Test CSV Product B

@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const User = require('../models/User');
 const RetailerProfile = require('../models/RetailerProfile');
 const { generateAccessToken, generateRefreshToken } = require('../utils/generateToken');
@@ -40,10 +41,14 @@ const registerUser = async (req, res) => {
                 // Should be caught by validation, but double check
                 return res.status(400).json({ message: 'Store name is required for retailers' });
             }
+            // Generate unique API key for SmartSync
+            const apiKey = crypto.randomBytes(32).toString('hex');
+
             const retailerProfile = new RetailerProfile({
                 user: savedUser._id,
                 storeName,
                 gstin,
+                apiKey, // Add API key for SmartSync integration
                 address: { street: address } // Map simple string to street
             });
             const savedProfile = await retailerProfile.save();
@@ -88,16 +93,21 @@ const loginUser = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
+            console.log('Login failed: User not found', email);
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
         const isMatch = await bcrypt.compare(password, user.passwordHash);
 
         if (!isMatch) {
+            console.log('Login failed: Password mismatch', email);
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
+        console.log('User found:', user.email, 'Status:', user.status);
+
         if (user.status === 'BLOCKED') {
+            console.log('Login failed: User blocked');
             return res.status(403).json({ message: 'Your account has been blocked. Contact admin.' });
         }
 

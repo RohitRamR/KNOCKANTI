@@ -1,0 +1,15 @@
+{
+  "serverUrl": "http://localhost:5002",
+  "agentKey": "6b40b0ba720df459e0b4412198ed7736f9b119c99d8816fc2c9b4821e3d501eb",
+  "connectorType": "CSV",
+  "connectorConfig": {
+    "filePath": "d:\\New folder (2)\\KNOCKANTI\\server\\public\\inventory.csv",
+    "fileType": "csv",
+    "fieldMapping": {
+      "sku": "sku",
+      "stock": "stock",
+      "price": "price",
+      "name": "name"
+    }
+  }
+}

@@ -13,6 +13,7 @@ const customerRoutes = require('./routes/customerRoutes');
 const deliveryRoutes = require('./routes/deliveryRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const smartSyncRoutes = require('./routes/smartSyncRoutes');
+const smartSyncAgentRoutes = require('./routes/smartSyncAgentRoutes');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/retailer', retailerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/smartsync', smartSyncRoutes);
+app.use('/api/smartsync', smartSyncAgentRoutes);
 app.use('/api/delivery', deliveryRoutes);
 app.use('/api/customers', customerRoutes);
 

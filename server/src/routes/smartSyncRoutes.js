@@ -28,5 +28,7 @@ router.get('/profile', authMiddleware.protect, smartSyncController.getProfile);
 router.post('/ingest', authMiddleware.protect, upload.single('file'), smartSyncController.ingestPayload);
 router.get('/history', authMiddleware.protect, smartSyncController.getSyncHistory);
 router.post('/webhook', smartSyncController.webhook); // Public endpoint protected by API Key
+router.get('/agent', smartSyncController.downloadAgent);
+router.get('/agent-zip', smartSyncController.downloadAgentZip);
 
 module.exports = router;

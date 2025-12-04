@@ -25,6 +25,10 @@ const SmartSyncRetailer = () => {
     useEffect(() => {
         fetchHistory();
         fetchProfile();
+
+        // Auto-refresh history every 10 seconds
+        const interval = setInterval(fetchHistory, 10000);
+        return () => clearInterval(interval);
     }, []);
 
     const fetchProfile = async () => {
@@ -142,8 +146,8 @@ const SmartSyncRetailer = () => {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`pb - 3 px - 4 font - medium capitalize transition - colors relative ${activeTab === tab ? 'text-green-600' : 'text-gray-500 hover:text-gray-800'
-                            } `}
+                        className={`pb-3 px-4 font-medium capitalize transition-colors relative ${activeTab === tab ? 'text-green-600' : 'text-gray-500 hover:text-gray-800'
+                            }`}
                     >
                         {tab.replace('-', ' ')}
                         {activeTab === tab && (
@@ -214,10 +218,10 @@ const SmartSyncRetailer = () => {
                                             <td className="p-4 font-mono text-xs text-gray-500">{log.batchId.substring(0, 8)}...</td>
                                             <td className="p-4 text-sm">{log.sourceType}</td>
                                             <td className="p-4">
-                                                <span className={`px - 2 py - 1 rounded - full text - xs font - medium ${log.status === 'SUCCESS' ? 'bg-green-100 text-green-600' :
+                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${log.status === 'SUCCESS' ? 'bg-green-100 text-green-600' :
                                                     log.status === 'FAILED' ? 'bg-red-100 text-red-600' :
                                                         'bg-orange-100 text-orange-600'
-                                                    } `}>
+                                                    }`}>
                                                     {log.status}
                                                 </span>
                                             </td>
@@ -611,16 +615,16 @@ const SmartSyncRetailer = () => {
                                             <button
                                                 onClick={() => {
                                                     const link = document.createElement('a');
-                                                    link.href = 'http://localhost:5002/agent.js';
-                                                    link.download = 'agent.js';
+                                                    link.href = 'http://localhost:5002/api/smartsync/agent-zip';
+                                                    link.download = 'agent.zip';
                                                     document.body.appendChild(link);
                                                     link.click();
                                                     document.body.removeChild(link);
-                                                    toast.success('Agent script downloaded!');
+                                                    toast.success('Agent script downloaded! Please unzip it.');
                                                 }}
                                                 className="py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-2 text-sm"
                                             >
-                                                <Download size={16} /> Download agent.js
+                                                <Download size={16} /> Download agent.zip
                                             </button>
                                         </div>
                                     </div>

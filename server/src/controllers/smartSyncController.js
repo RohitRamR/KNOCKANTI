@@ -135,10 +135,15 @@ exports.ingestPayload = async (req, res) => {
         let profile = await SmartSyncProfile.findOne({ retailer: retailerId });
         let mapping = profile?.fieldMapping || {};
 
-        // If profile mapping is empty or incomplete, use AI Heuristics
-        if (!mapping.sku || !mapping.stock) {
-            const headers = Object.keys(payload[0] || {});
-            const detected = detectMapping(headers);
+        // If profile mapping is empty or incomplete, OR if the current payload doesn't match the mapping
+        const payloadHeaders = Object.keys(payload[0] || {});
+        const isMappingValid = mapping.sku && payloadHeaders.includes(mapping.sku);
+
+        if (!isMappingValid || !mapping.stock) {
+            console.log('Mapping invalid or missing. Auto-detecting...');
+            const detected = detectMapping(payloadHeaders);
+
+            // Merge, but prefer detected for conflicts if invalid
             mapping = { ...mapping, ...detected };
 
             // Auto-save the detected mapping for future convenience
@@ -380,4 +385,34 @@ exports.webhook = async (req, res) => {
         console.error('Webhook error:', error);
         res.status(500).json({ message: 'Webhook failed', error: error.message });
     }
+};
+
+exports.downloadAgent = (req, res) => {
+    const path = require('path');
+    const filePath = path.join(__dirname, '../../public/agent.js');
+
+    res.setHeader('Content-Disposition', 'attachment; filename="agent.js"');
+    res.download(filePath, 'agent.js', (err) => {
+        if (err) {
+            console.error('Error downloading agent.js:', err);
+            if (!res.headersSent) {
+                res.status(500).json({ message: 'Could not download agent file' });
+            }
+        }
+    });
+};
+
+exports.downloadAgentZip = (req, res) => {
+    const path = require('path');
+    const filePath = path.join(__dirname, '../../public/agent.zip');
+
+    res.setHeader('Content-Disposition', 'attachment; filename="agent.zip"');
+    res.download(filePath, 'agent.zip', (err) => {
+        if (err) {
+            console.error('Error downloading agent.zip:', err);
+            if (!res.headersSent) {
+                res.status(500).json({ message: 'Could not download agent zip file' });
+            }
+        }
+    });
 };

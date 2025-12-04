@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const User = require('./models/User');
 const RetailerProfile = require('./models/RetailerProfile');
 const Product = require('./models/Product');
@@ -52,10 +53,14 @@ const seedData = async () => {
             });
             const savedRetailer = await retailer.save();
 
+            // Generate API key for SmartSync
+            const apiKey = crypto.randomBytes(32).toString('hex');
+
             profile = await RetailerProfile.create({
                 user: savedRetailer._id,
                 storeName: 'Gupta General Store',
                 gstin: '27AAAAA0000A1Z5',
+                apiKey, // Add API key for SmartSync
                 address: {
                     street: '12, MG Road, Indiranagar',
                     city: 'Bangalore',
@@ -69,9 +74,17 @@ const seedData = async () => {
             console.log('Retailer created');
         } else {
             retailer.passwordHash = passwordHash;
+            retailer.status = 'ACTIVE'; // Force active
             await retailer.save();
             console.log('Retailer password updated');
             profile = await RetailerProfile.findOne({ user: retailer._id });
+
+            // Add API key if missing
+            if (profile && !profile.apiKey) {
+                profile.apiKey = crypto.randomBytes(32).toString('hex');
+                await profile.save();
+                console.log('Retailer API key generated');
+            }
         }
 
         // 3. Add/Update Products (Always run this to fix data)

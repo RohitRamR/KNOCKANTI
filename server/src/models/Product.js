@@ -9,7 +9,9 @@ const productSchema = new mongoose.Schema({
     category: { type: String },
     subCategory: { type: String }, // e.g. 'Smartphone', 'Antibiotics'
     price: { type: Number, required: true }, // Selling Price
+    mrp: { type: Number }, // Maximum Retail Price
     purchasePrice: { type: Number },
+    isActive: { type: Boolean, default: true },
     taxRate: { type: Number, default: 0 },
     stockQuantity: { type: Number, default: 0 },
     unit: { type: String, default: 'pcs' },

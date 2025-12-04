@@ -1,8 +1,17 @@
 sku,stock,price,name
-SKU001,150,12.99,Cola Classic
-SKU002,85,10.50,Orange Soda
+SKU001,200,19.99,Cola Classic
+SKU002,150,10.50,Orange Soda
 SKU003,200,8.99,Lemon Sparkle
 SKU004,50,15.00,"Premium Tonic, 500ml"
 SKU005,10,5.00,Test Product Live Sync
 SKU006,99,99.99,Secure Sync Test Product
-SKU007,77,7.77,Zero Dependency Test Product
+SKU007,100,55.00,Basmati Rice 1kg
+SKU008,0,48.50,Wheat Flour 1kg
+SKU009,0,42.00,White Sugar 1kg
+SKU010,0,30.00,Toor Dal 1kg
+SKU011,0,25.00,Salt Pack 1kg
+SKU012,0,115.00,Sunflower Oil 1L
+SKU013,0,35.00,Groundnut Oil 500ml
+SKU014,0,78.00,Tea Powder 250g
+SKU015,0,22.00,Turmeric Powder 100g
+SKU016,0,35.00,Whole Wheat Bread 400g
